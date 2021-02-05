@@ -68,18 +68,18 @@ openFile(fileName: string): Promise<vscode.TextEditor> {
 }
 
 export async function
-getFileNameFromUser(): Promise<string> {
-  const defaultFileName = "new-post.md";
-  let question = `What's the name of the new post?`;
+getPostTitleFromUser(): Promise<string> {
+  const defaultPostTitle = "Untitled Post";
+  let question = `What's the title of the new post?`;
 
-  let filePath = await vscode.window.showInputBox({
+  let postTitle = await vscode.window.showInputBox({
     prompt: question,
-    value: defaultFileName,
+    value: defaultPostTitle,
   });
-  if (filePath === null || filePath === undefined) {
-    return defaultFileName;
+  if (postTitle === null || postTitle === undefined) {
+    return defaultPostTitle;
   }
-  return filePath || defaultFileName;
+  return postTitle || defaultPostTitle;
 }
 
 export function
@@ -94,14 +94,16 @@ getDateTime(): string {
   return yyyy + '-' + mm + '-' + dd + ' ' + time;
 }
 
+// converts post name to legal file name in the form yyyy-mm-dd-post-name-here.md
 export function
-addDateToFilename(fileName: string): string {
-  if (fileName === null) {
+normalizeFilename(postName: string): string {
+  if (postName === null) {
     throw undefined;
   }
+  const legalFileName = postName.toLowerCase().replace(' ', '-').replace(/[/\\?%*:|"<>]/g, '-')
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
   var mm = String(today.getMonth() + 1).padStart(2, '0');
   var yyyy = today.getFullYear();
-  return yyyy + '-' + mm + '-' + dd + '-' + fileName;
+  return `${yyyy}-${mm}-${dd}-${legalFileName}.md`
 }

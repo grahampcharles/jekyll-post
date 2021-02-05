@@ -47,7 +47,7 @@ to provide the name of the file.
 
 - Adds a new explorer context menu option to create new blog posts
 - Sets up the file name automatically in the format expected by Jekyll
-  (`YYY-mm-dd-*.*`)
+  (`YYYY-mm-dd-file-name-lowercase.md`)
 - Ability to provide a template file for new posts in the Jekyll project root
   directory
 - If no template file is provided, the extension uses a pre-defined template
