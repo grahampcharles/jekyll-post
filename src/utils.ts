@@ -100,7 +100,7 @@ normalizeFilename(postName: string): string {
   if (postName === null) {
     throw undefined;
   }
-  const legalFileName = postName.toLowerCase().replace(' ', '-').replace(/[/\\?%*:|"<>]/g, '-')
+  const legalFileName = postName.toLowerCase().replace(/ /g, '-').replace(/[/\\?%*:|"<>]/g, '-')
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
   var mm = String(today.getMonth() + 1).padStart(2, '0');
